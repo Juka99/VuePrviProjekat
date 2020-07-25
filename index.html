@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue bajo</title>
+    <link rel='stylesheet' href='style.css'></script>
+
+
+</head>
+<body>
+
+    <div id="app">
+        
+        <div id='youAndEnemy'>
+
+            <div class="you box">
+
+                <h3>You</h3>
+                <div class="youBar bar">
+                    <div class="youFiller filler" :style="{width : youPoints + '%'}">
+
+                        <p>{{ youPoints }}</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="enemy box">
+
+                <h3>Enemy</h3>
+                <div class="enemyBar bar">
+                    <div class="enemyFiller filler" :style="{width : enemyPoints + '%'}">
+
+                        <p>{{ enemyPoints }}</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <button class='green' v-if="!showButtons" @click='showButtons = !showButtons'>Start New Game</button>
+
+            <div id='otherButtons' v-else>
+
+                <button class='red' @click="attack">Attack</button>
+                <button class='yellow' v-if="counter > 3" @click="special">Special Attack</button>
+                <button class='green' @click="heal">Heal</button>
+                <button class='grey' @click="giveUp">Start Over</button>
+
+            </div>
+
+        </div>
+
+        <div class="info">
+
+            <table>
+
+                <tbody>
+
+                    <tr v-for="attack of attacksLog">
+
+                        <td>{{ attack }}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+      <script src='vue.js'></script>
+
+      <script>
+
+        new Vue({
+
+            el : '#app',
+            data : {
+
+                showButtons : false,
+                youPoints : 100,
+                enemyPoints : 100,
+                counter : 0,
+                attacksLog : []
+
+            },
+
+            methods : {
+
+                attack : function(){
+
+                    var youAttack = Math.ceil(Math.random() * 10) + 5;
+
+                    var enemyAttack = Math.ceil(Math.random() * 10) + 5;
+                    
+                    console.log(youAttack, enemyAttack)
+
+                    this.youPoints -= enemyAttack;
+
+                    this.enemyPoints -= youAttack;
+
+                    this.attacksLog.push("You dealt " + youAttack + " damage to the enemy !");
+
+                    this.attacksLog.push("Enemy dealt " + enemyAttack + " damage to the you !");
+
+                    console.log(this.attacksLog);
+
+                    this.counter++;
+                    
+                    this.checkTheEnd();
+
+                },
+
+                special : function(){
+
+                    var youSpecialAttack = Math.ceil(Math.random() * 10) + 15;
+
+                    var enemyAttackBasic = Math.ceil(Math.random() * 10) + 5;
+                    
+                    console.log(youSpecialAttack, enemyAttackBasic)
+
+                    this.youPoints -= enemyAttackBasic;
+
+                    this.enemyPoints -= youSpecialAttack;
+
+                    this.attacksLog.push("You dealt " + youSpecialAttack + " special magic damage to the enemy !");
+
+                    this.attacksLog.push("Enemy dealt " + enemyAttackBasic + " damage to the you !");
+
+                    console.log(this.attacksLog);
+
+                    this.counter = 0;
+
+                    this.checkTheEnd();
+
+                },
+
+                heal : function(){
+
+                    var healMe = Math.ceil(Math.random() * 10) + 5;
+
+                    var enemyAttackBasic = Math.ceil(Math.random() * 10) + 5;
+
+                    this.youPoints += healMe;
+
+                    this.youPoints -= enemyAttackBasic;
+
+                    this.attacksLog.push("You healed " + healMe + " !");
+
+                    this.attacksLog.push("Enemy dealt " + enemyAttackBasic + " damage to the you !");
+
+                    this.checkTheEnd();
+
+                },
+
+                giveUp : function(){
+
+                    this.showButtons = !this.showButtons;
+
+                    this.counter = 0;
+
+                    this.attacksLog = [];
+
+                    this.youPoints = 100;
+
+                    this.enemyPoints = 100;
+
+                },
+
+                checkTheEnd : function(){
+
+                    if(this.youPoints <= 0){
+
+                        alert('You lost !');
+
+                        this.giveUp();
+
+                    }
+
+                    if(this.enemyPoints <= 0){
+
+                        alert("You won !");
+
+                        this.giveUp();
+
+                    }
+
+                }
+
+            }
+
+        });
+
+      </script>
+
+</body>
+</html>

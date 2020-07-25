@@ -1,0 +1,166 @@
+*{
+
+    margin: 0px;
+    padding: 0px;
+
+}
+
+body{
+
+    width: 100%;
+    
+    #app{
+
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        #youAndEnemy{
+
+            width: 80%;
+            display: flex;
+            justify-content : space-around;
+
+            .box{
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                width: 45%;
+
+                h3{
+
+                    color: #141414;
+                    font-size: 2em;
+                    padding: 5% 0%;
+
+                }
+
+                .bar{
+
+                    width: 100%;
+                    height: 50px;
+                    background-color: #c2c2c2;
+
+                    .filler{
+
+                        height: 100%;
+                        background-color: rgb(67, 197, 67);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: 1s;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        .buttons{
+
+            margin: 5% 0%;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 5% 0%;
+
+            button{
+
+                width: 20%;
+                padding: 2% 2%;
+
+            }
+
+            .green{
+
+                background-color: rgb(71, 200, 71);;
+
+            }
+
+            .yellow{
+
+                background-color: yellow;
+
+            }
+
+            .red{
+
+                background-color: tomato;
+
+            }
+
+            .grey{
+
+                background-color: gray;
+
+            }
+
+            #otherButtons{
+
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+
+            }
+
+        }
+
+        .info{
+
+            width: 100%;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            table{
+
+                width: 80%;
+
+                tbody{
+
+                    width: 100%;
+
+                    tr{
+
+
+                        &:nth-child(odd){
+
+                            background-color: tomato;
+
+                        }
+
+                        &:nth-child(even){
+
+                            background-color: aqua;
+
+                        }
+
+                        td{
+
+                            margin: 3% 0%;
+                            padding: 2% 0%;
+                            text-align: center;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
